@@ -19,15 +19,19 @@ import {
 
 export function initGlobalAPI (Vue: GlobalAPI) {
   // config
+  // 只是一个给 config 进行配置的定义
   const configDef = {}
   configDef.get = () => config
   if (process.env.NODE_ENV !== 'production') {
+    // 非线上环境给予提示。非线上环境不给提示
+    // 上线的代码都尽可能不会有 console 等打印的干扰信息
     configDef.set = () => {
       warn(
         'Do not replace the Vue.config object, set individual fields instead.'
       )
     }
   }
+  // 
   Object.defineProperty(Vue, 'config', configDef)
 
   // exposed util methods.
@@ -46,6 +50,8 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 
   Vue.options = Object.create(null)
   ASSET_TYPES.forEach(type => {
+    // 没看懂?
+    // - 其它地方有使用 :62 相似代码对 ASSET_TYPES 进行扩展 extend(Vue.options.
     Vue.options[type + 's'] = Object.create(null)
   })
 
@@ -54,7 +60,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
   Vue.options._base = Vue
 
   extend(Vue.options.components, builtInComponents)
-
+  // init 只是添加一个属性给 vue 的含义
   initUse(Vue)
   initMixin(Vue)
   initExtend(Vue)

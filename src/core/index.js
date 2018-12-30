@@ -12,6 +12,7 @@ Object.defineProperty(Vue.prototype, '$isServer', {
 Object.defineProperty(Vue.prototype, '$ssrContext', {
   get () {
     /* istanbul ignore next */
+    // istanbul 是一个统计测试工具通过情况的工具 https://istanbul.js.org/
     return this.$vnode && this.$vnode.ssrContext
   }
 })

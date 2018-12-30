@@ -263,6 +263,7 @@ export function updateChildComponent (
 
   // update listeners
   listeners = listeners || emptyObject
+  // 不会陷入指向型吗?
   const oldListeners = vm.$options._parentListeners
   vm.$options._parentListeners = listeners
   updateComponentListeners(vm, listeners, oldListeners)
