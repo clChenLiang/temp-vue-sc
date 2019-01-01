@@ -7,6 +7,7 @@ import config from '../config'
 let uid = 0
 
 /**
+ * Dep 是一个可以让多个 directives 订阅的可观察对象
  * A dep is an observable that can have multiple
  * directives subscribing to it.
  */
@@ -36,6 +37,7 @@ export default class Dep {
 
   notify () {
     // stabilize the subscriber list first
+    // 此处为何需要重新复制，是因为有排序的需求吗
     const subs = this.subs.slice()
     if (process.env.NODE_ENV !== 'production' && !config.async) {
       // subs aren't sorted in scheduler if not running async
@@ -48,7 +50,7 @@ export default class Dep {
     }
   }
 }
-
+// ?Watcher 的逻辑，当前只有一个可以被评估？
 // The current target watcher being evaluated.
 // This is globally unique because only one watcher
 // can be evaluated at a time.

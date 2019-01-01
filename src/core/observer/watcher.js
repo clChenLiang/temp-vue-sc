@@ -79,6 +79,8 @@ export default class Watcher {
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
     } else {
+      // 由 'a.b.c' 类似的方式得到的函数
+      // 其中 parsePath 返回的是一个函数
       this.getter = parsePath(expOrFn)
       if (!this.getter) {
         this.getter = noop

@@ -91,6 +91,7 @@ function protoAugment (target, src: Object) {
 }
 
 /**
+ * 通过定义隐藏属性增加一个目标对象/数组
  * Augment a target Object or Array by defining
  * hidden properties.
  */
@@ -100,7 +101,7 @@ function copyAugment (target: Object, src: Object, keys: Array<string>) {
     const key = keys[i]
     def(target, key, src[key])
   }
-}
+} 
 
 /**
  * Attempt to create an observer instance for a value,
@@ -171,8 +172,11 @@ export function defineReactive (
       return value
     },
     set: function reactiveSetter (newVal) {
+      // set 时，其值仍为 旧值
       const value = getter ? getter.call(obj) : val
       /* eslint-disable no-self-compare */
+      // ?自比较是什么意思
+      // {a:1} !== {a:1} true
       if (newVal === value || (newVal !== newVal && value !== value)) {
         return
       }
