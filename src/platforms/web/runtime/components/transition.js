@@ -143,6 +143,9 @@ export default {
     // component instance. This key will be used to remove pending leaving nodes
     // during entering.
     const id: string = `__transition-${this._uid}-`
+    // 这种结构 true ? true ? true ? 5:4  :3 : 2 ---  5
+    // => 变异结构 true ? true ? true ? (false 5):4  :3 : 2 ---  5
+    // 直接换算过来几个问号，几个冒号，最终表达式结果与首 false 的位置对称
     child.key = child.key == null
       ? child.isComment
         ? id + 'comment'
