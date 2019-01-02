@@ -2,6 +2,9 @@ import type { Config } from '../src/core/config'
 import type VNode from '../src/core/vdom/vnode'
 import type Watcher from '../src/core/observer/watcher'
 
+// flow 既可以理解为类型检测，也可以把它当作模型定义
+// 看 VUE 的过程中，很多元素属性不确定，如果有 flow 类型检测的话，
+// 可以直接在 /flow/ 中进行查找，从 interface 直接看会清晰很多
 declare interface Component {
   // constructor information
   static cid: number;
